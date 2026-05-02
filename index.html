@@ -31,15 +31,27 @@
 
     /* ── Seite 1: Regeln ── */
     .page-regeln {
-      background: #f5f0e8;
+      background: #d4b896;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 8mm 10mm;
+      gap: 10px;
     }
 
     .page-regeln img {
-      width: 100%;
-      height: 100%;
+      width: calc(100% - 10mm);
+      flex: 1;
+      min-height: 0;
       object-fit: contain;
       display: block;
       border-radius: 8px;
+    }
+
+    /* Hinweis auf Seite 1 im normalen Fluss (über dem Bild) */
+    .page-regeln .hinweis {
+      position: static;
+      width: 100%;
     }
 
     /* Platzhalter falls kein Bild vorhanden */
@@ -67,6 +79,9 @@
 
     /* ── Seite 2: Spielkarte ── */
     .page-spielkarte img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
