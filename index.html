@@ -29,12 +29,17 @@
       justify-content: center;
     }
 
-    /* ── Seite 1: Spielkarte ── */
-    .page-spielkarte img {
+    /* ── Seite 1: Regeln ── */
+    .page-regeln {
+      background: #f5f0e8;
+    }
+
+    .page-regeln img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
+      border-radius: 8px;
     }
 
     /* Platzhalter falls kein Bild vorhanden */
@@ -60,11 +65,11 @@
       line-height: 1.6;
     }
 
-    /* ── Seite 2: Regeln ── */
-    .page-regeln img {
+    /* ── Seite 2: Spielkarte ── */
+    .page-spielkarte img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
     }
 
@@ -97,14 +102,18 @@
 
     /* ── Hinweisbox (nur am Bildschirm sichtbar) ── */
     .hinweis {
-      width: 210mm;
-      margin: 0 auto 8mm auto;
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 10;
       background: #fff8e1;
       border-left: 4px solid #f9a825;
       padding: 10px 16px;
       font-size: 10pt;
       color: #555;
       line-height: 1.7;
+      border-radius: 4px;
     }
 
     .hinweis strong {
@@ -118,14 +127,23 @@
 </head>
 <body>
 
-  <div class="hinweis">
-    <strong>So verwendest du diese Datei:</strong><br>
-    1. Ersetze <code>spielkarte.png</code> und <code>regeln.png</code> mit deinen eigenen Bilddateien (einfach im selben Ordner ablegen).<br>
-    2. Drücke <strong>Strg+P</strong> (oder Cmd+P) → Drucker auswählen → <strong>„Keine Ränder"</strong> einstellen → Drucken.<br>
-    3. Alternativ: Im Browser als PDF speichern (Ziel: „Als PDF speichern").
+  <!-- ── SEITE 1: Regeln ── -->
+  <div class="page page-regeln">
+    <div class="hinweis">
+      <strong>So druckst du diese Datei:</strong><br>
+      1. Drücke <strong>Strg+P</strong> (oder Cmd+P) → Drucker auswählen → <strong>„Keine Ränder"</strong> einstellen → Drucken.<br>
+      2. Alternativ: Im Browser als PDF speichern (Ziel: „Als PDF speichern").
+    </div>
+    <img src="regeln.png" alt="Regeln"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="placeholder" style="display:none;">
+      <span>📋</span>
+      <span><strong>Regeln</strong></span>
+      <span class="label">Lege dein Regelbild als <strong>regeln.png</strong> in denselben Ordner wie diese HTML-Datei.</span>
+    </div>
   </div>
 
-  <!-- ── SEITE 1: Spielkarte ── -->
+  <!-- ── SEITE 2: Spielkarte ── -->
   <div class="page page-spielkarte">
     <img src="spielkarte.png" alt="Spielkarte"
          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -133,17 +151,6 @@
       <span>🎲</span>
       <span><strong>Spielkarte</strong></span>
       <span class="label">Lege deine Spielkarte als <strong>spielkarte.png</strong> in denselben Ordner wie diese HTML-Datei.</span>
-    </div>
-  </div>
-
-  <!-- ── SEITE 2: Regeln ── -->
-  <div class="page page-regeln">
-    <img src="regeln.png" alt="Regeln"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-    <div class="placeholder" style="display:none;">
-      <span>📋</span>
-      <span><strong>Regeln</strong></span>
-      <span class="label">Lege dein Regelbild als <strong>regeln.png</strong> in denselben Ordner wie diese HTML-Datei.</span>
     </div>
   </div>
 
