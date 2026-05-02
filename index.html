@@ -89,10 +89,11 @@
 
     /* ── Druckoptimierung ── */
     @media print {
-      body {
+      html, body {
         background: white;
         margin: 0;
         padding: 0;
+        height: auto;
       }
 
       .page {
@@ -100,12 +101,15 @@
         width: 210mm;
         height: 297mm;
         page-break-after: always;
+        break-after: page;
         page-break-inside: avoid;
+        break-inside: avoid;
         box-shadow: none;
       }
 
       .page:last-child {
         page-break-after: avoid;
+        break-after: avoid;
       }
 
       @page {
