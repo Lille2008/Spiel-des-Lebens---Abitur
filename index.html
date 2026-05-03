@@ -5,18 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Das Spiel des Lebens – Abitur</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #c8c8c8;
       font-family: Georgia, serif;
     }
 
-    /* ── A4-Seite ── */
+    /* ── Setup-Screen ── */
+    #setup-screen {
+      width: 210mm;
+      margin: 10mm auto 0 auto;
+      background: #f5ede0;
+      border: 2px solid #7a5a3a;
+      border-radius: 8px;
+      padding: 28px 30px;
+      text-align: center;
+      color: #2c1a0e;
+    }
+
+    #setup-screen h1 { font-size: 18pt; margin-bottom: 6px; }
+    #setup-screen > p { font-size: 10pt; color: #7a5a3a; margin-bottom: 18px; }
+
+    .player-count-btns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .player-count-btns button {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid #7a5a3a;
+      background: white;
+      font-size: 16pt;
+      font-family: Georgia, serif;
+      color: #2c1a0e;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .player-count-btns button:hover,
+    .player-count-btns button.selected {
+      background: #7a5a3a;
+      color: white;
+    }
+
+    .player-names {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 22px;
+      align-items: center;
+    }
+
+    .player-names input {
+      width: 240px;
+      padding: 7px 12px;
+      border: 1px solid #9a7a5a;
+      border-radius: 4px;
+      font-family: Georgia, serif;
+      font-size: 11pt;
+      background: #fff8f0;
+      color: #2c1a0e;
+    }
+
+    .player-names input::placeholder { color: #b09070; }
+
+    #start-btn {
+      padding: 10px 32px;
+      background: #7a5a3a;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-family: Georgia, serif;
+      font-size: 12pt;
+      cursor: pointer;
+    }
+
+    #start-btn:hover { background: #5a3a1a; }
+
+    /* ── Hinweise (versteckt bis nach Setup) ── */
+    #hinweise-container {
+      display: none;
+      width: 210mm;
+      margin: 6mm auto 0 auto;
+      background: #fff8e1;
+      border-left: 4px solid #f9a825;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 9.5pt;
+      color: #555;
+      line-height: 1.75;
+    }
+
+    #hinweise-container strong { color: #333; }
+    #hinweise-container ul { margin: 4px 0 0 18px; }
+    #hinweise-container li { margin-bottom: 3px; }
+    #hinweise-container h3 { font-size: 10pt; color: #7a5a3a; margin-bottom: 4px; }
+    #hinweise-container hr { border: none; border-top: 1px solid #f0d080; margin: 8px 0; }
+
+    @media print {
+      #hinweise-container { display: none !important; }
+    }
+
+    /* ── Seiten ── */
+    #pages { display: none; }
+
     .page {
       width: 210mm;
       height: 297mm;
@@ -29,7 +127,7 @@
       justify-content: center;
     }
 
-    /* ── Seite 1: Regeln ── */
+    /* Seite 1: Regeln */
     .page-regeln {
       background: #f5ede0;
       flex-direction: column;
@@ -39,13 +137,6 @@
       gap: 10px;
     }
 
-    /* Hinweis auf Seite 1 im normalen Fluss (über dem Text) */
-    .page-regeln .hinweis {
-      position: static;
-      width: 100%;
-    }
-
-    /* ── Regeltext ── */
     .regeln-content {
       width: 100%;
       font-family: Georgia, serif;
@@ -57,59 +148,18 @@
       padding: 6px 8px;
     }
 
-    .regeln-content h1 {
-      font-size: 14pt;
-      text-align: center;
-      margin-bottom: 6px;
-      letter-spacing: 1px;
-    }
-
-    .regeln-content h2 {
-      font-size: 10pt;
-      margin-top: 6px;
-      margin-bottom: 3px;
-    }
-
-    .regeln-content ul {
-      margin: 0 0 4px 16px;
-      padding: 0;
-    }
-
-    .regeln-content ul ul {
-      margin-left: 14px;
-    }
-
-    .regeln-content li {
-      margin-bottom: 2px;
-    }
-
-    .regeln-content hr {
-      border: none;
-      border-top: 1px solid #9a7a5a;
-      margin: 6px 0;
-    }
-
-    .regeln-content table {
-      border-collapse: collapse;
-      margin: 4px 0 2px 0;
-      font-size: 8.5pt;
-    }
-
-    .regeln-content th,
-    .regeln-content td {
-      border: 1px solid #9a7a5a;
-      padding: 2px 20px;
-    }
-
-    .regeln-content th {
-      background: #c4a47c;
-    }
+    .regeln-content h1 { font-size: 14pt; text-align: center; margin-bottom: 6px; letter-spacing: 1px; }
+    .regeln-content h2 { font-size: 10pt; margin-top: 6px; margin-bottom: 3px; }
+    .regeln-content ul { margin: 0 0 4px 16px; padding: 0; }
+    .regeln-content ul ul { margin-left: 14px; }
+    .regeln-content li { margin-bottom: 2px; }
+    .regeln-content hr { border: none; border-top: 1px solid #9a7a5a; margin: 6px 0; }
 
     .punkte-tabelle {
       border-collapse: collapse;
       width: 100%;
       font-family: Georgia, serif;
-      font-size: 8.5pt;
+      font-size: 9pt;
       color: #2c1a0e;
       margin-top: 6px;
     }
@@ -117,17 +167,109 @@
     .punkte-tabelle th,
     .punkte-tabelle td {
       border: 1px solid #9a7a5a;
-      padding: 8px 8px;
+      padding: 6px 8px;
     }
 
-    .punkte-tabelle th {
-      background: #c4a47c;
+    .punkte-tabelle th { background: #c4a47c; }
+
+    /* Seite 2: Figuren + Tabelle */
+    .page-figuren {
+      background: #f5ede0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10mm;
+      gap: 6mm;
     }
 
-    /* Platzhalter falls kein Bild vorhanden */
-    .placeholder {
+    .figuren-titel {
+      font-size: 14pt;
+      color: #2c1a0e;
+      text-align: center;
+      border-bottom: 2px solid #7a5a3a;
+      padding-bottom: 4mm;
+      width: 100%;
+    }
+
+    .figuren-anleitung {
+      font-size: 8.5pt;
+      color: #7a5a3a;
+      text-align: center;
+    }
+
+    .figuren-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10mm;
+    }
+
+    .figur-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    /* 1-Cent = 16.25mm */
+    .figur-kreis {
+      width: 16.25mm;
+      height: 16.25mm;
+      border-radius: 50%;
+      border: 1.5px dashed #9a7a5a;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+
+    .figur-kreis img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .figur-kreis .upload-hint {
+      font-size: 6pt;
+      color: #b09070;
+      text-align: center;
+      padding: 2px;
+      line-height: 1.3;
+    }
+
+    .figur-name {
+      font-size: 8pt;
+      color: #2c1a0e;
+      font-family: Georgia, serif;
+      text-align: center;
+    }
+
+    .trennlinie {
+      width: 100%;
+      border-top: 1.5px solid #9a7a5a;
+      margin: 2mm 0;
+    }
+
+    .tabelle-titel {
+      font-size: 12pt;
+      color: #2c1a0e;
+      text-align: center;
+      margin-bottom: 2mm;
+    }
+
+    /* Seite 3: Spielkarte */
+    .page-spielkarte img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .placeholder {
+      width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -147,30 +289,13 @@
       line-height: 1.6;
     }
 
-    /* ── Seite 2: Spielkarte ── */
-    .page-spielkarte img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── Seitenrand entfernen (Top-Level, damit mobile Browser es korrekt anwenden) ── */
-    @page {
-      size: A4 portrait;
-      margin: 0mm;
-    }
-
-    /* ── Druckoptimierung ── */
+    /* ── Druck ── */
     @media print {
+      #setup-screen { display: none; }
+
       html, body {
         background: white;
-        margin: 0;
-        padding: 0;
-        height: auto;
+        margin: 0; padding: 0;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
@@ -190,130 +315,238 @@
         page-break-after: avoid;
         break-after: avoid;
       }
+
+      .figur-kreis { border: 1px solid #000; cursor: default; }
+      .figur-kreis .upload-hint { display: none; }
     }
 
-    /* ── Hinweisbox (nur am Bildschirm sichtbar) ── */
-    .hinweis {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      z-index: 10;
-      background: #fff8e1;
-      border-left: 4px solid #f9a825;
-      padding: 10px 16px;
-      font-size: 10pt;
-      color: #555;
-      line-height: 1.7;
-      border-radius: 4px;
-    }
-
-    .hinweis strong {
-      color: #333;
-    }
-
-    @media print {
-      .hinweis { display: none; }
-    }
+    @page { size: A4 portrait; margin: 0mm; }
   </style>
 </head>
 <body>
 
-  <!-- ── SEITE 1: Regeln ── -->
-  <div class="page page-regeln">
-    <div class="hinweis">
-      <strong>So druckst du diese Datei:</strong><br>
-      💻 <strong>Laptop/PC:</strong> Strg+P (oder Cmd+P) → <strong>„Keine Ränder"</strong> einstellen → Drucken.<br>
-      📱 <strong>Handy:</strong> Mobile Browser erzwingen oft Mindestränder. Beste Lösung: Seite zuerst als PDF speichern (Teilen → „In Dateien sichern" / „Als PDF") und das PDF dann drucken.
+  <!-- ── SETUP ── -->
+  <div id="setup-screen">
+    <h1>🎲 Das Spiel des Lebens – Abitur</h1>
+    <p>Wie viele Spieler nehmen teil?</p>
+
+    <div class="player-count-btns">
+      <button onclick="selectCount(2)">2</button>
+      <button onclick="selectCount(3)">3</button>
+      <button onclick="selectCount(4)">4</button>
+      <button onclick="selectCount(5)">5</button>
+      <button onclick="selectCount(6)">6</button>
+      <button onclick="selectCount(7)">7</button>
+      <button onclick="selectCount(8)">8</button>
     </div>
 
-    <div class="regeln-content">
-      <h1>Regeln</h1>
+    <div class="player-names" id="player-names"></div>
 
-      <ul>
-        <li>Schreibe dir deine aktuelle Punktzahl in Strichen in die Tabelle unten (am besten mit Bleistift
-          <ul>
-            <li>Jeder startet mit 10 Punkten (Schreibe für jeden Spieler 10 Striche in die Tabelle)</li>
-            <li>Punkte können nicht unter 0 oder über 15 steigen</li>
-          </ul>
-        </li>
-        <li>Würfle und gehe entsprechend viele Felder vor</li>
-        <li><strong>Klausurphase:</strong>
-          <ul>
-            <li>Immer dort anhalten, auch wenn du weiter gehen müsstest</li>
-            <li>Würfeln: 1–4 → bestanden; 5–6 → Nicht bestanden −2 Punkte</li>
-            <li>Nächste Runde darfst du weitergehen</li>
-          </ul>
-        </li>
-        <li><strong>Abitur:</strong>
-          <ul>
-            <li>5 oder mehr Punkte? → Würfeln
-              <ul>
-                <li>Würfeln: 6 → Abitur bestanden; keine 6 → −1 Punkt &amp; neue Chance in nächster Runde</li>
-              </ul>
-            </li>
-            <li>Weniger als 5 Punkte → Rückfall auf „Nur noch ein Jahr"</li>
-              <ul>
-                <li>Kann auch durch -1 passieren, wenn du keine 6 würfelst; dann fällst du nächste Runde zurück</li>
-                <li>Nachdem du schon einmal auf „Nur noch ein Jahr" zurückgefallen bist, hast du nur noch einen Versuch beim Abitur, ansonsten hast du das Abitur nicht bestanden</li>
-              </ul>
-          </ul>
-        </li>
-        <li>Gewonnen hat jeder mit Abitur; optional der Spieler mit den meisten Punkten</li>
-      </ul>
-
-      <hr>
-
-      <h2>Legende:</h2>
-      <ul>
-        <li>🟢 Grün +x = Addiere x Punkte zu deinem Punktestand</li>
-        <li>🔴 Rot −x = Ziehe x Punkte von deinem Punktestand ab</li>
-        <li>🟡 Gelb ⏸ = Setze 1 Runde aus</li>
-        <li>🔵 Blau +x/−x = Alle Spieler erhalten bzw. verlieren x Punkte</li>
-        <li>🎲 Pink = Spezialaktion: Würfeln</li>
-      </ul>
-
-      <hr>
-
-      <h2>Spezialaktion: Würfeln:</h2>
-      <ul>
-        <li><strong>Herr Wienstrath:</strong> 1 → +2 Punkte; 2 → +1; 3 → +/−&thinsp;0; 4 → −1; 5 → −2; 6 → −3</li>
-        <li><strong>Du spickst:</strong> 1–3 → +1 Punkt; 4–6 → −1 Punkt</li>
-        <li><strong>Kaufland:</strong>
-          <ul>
-            <li>„Nein": +1 Punkt ohne würfeln</li>
-            <li>„Ja": 1–3 → 3 Felder vor; 4–6 → 2 Runden aussetzen</li>
-          </ul>
-        </li>
-        <li><strong>Herr Stahl:</strong> Gehe die Augenzahl nach erneutem Würfeln vor</li>
-      </ul>
-    </div>
-
-    <table class="punkte-tabelle">
-      <thead><tr><th>Spieler</th><th>Punktzahl</th></tr></thead>
-      <tbody>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-      </tbody>
-    </table>
+    <button id="start-btn" onclick="startGame()" style="display:none;">
+      Spielfeld erstellen →
+    </button>
   </div>
 
-  <!-- ── SEITE 2: Spielkarte ── -->
-  <div class="page page-spielkarte">
-    <img src="spielkarte.png" alt="Spielkarte"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-    <div class="placeholder" style="display:none;">
-      <span>🎲</span>
-      <span><strong>Spielkarte</strong></span>
-      <span class="label">Lege deine Spielkarte als <strong>spielkarte.png</strong> in denselben Ordner wie diese HTML-Datei.</span>
-    </div>
+  <!-- ── HINWEISE (erscheinen nach Setup, über den Seiten) ── -->
+  <div id="hinweise-container">
+    <h3>📋 Hinweise</h3>
+    <hr>
+    <strong>Drucken:</strong>
+    <ul>
+      <li>💻 <strong>Laptop/PC:</strong> Strg+P (oder Cmd+P) → <strong>„Keine Ränder"</strong> einstellen → Drucken</li>
+      <li>📱 <strong>Handy:</strong> Seite zuerst als PDF speichern (Teilen → „Als PDF") und das PDF dann drucken</li>
+    </ul>
+    <hr>
+    <strong>Spielfiguren (Seite 2):</strong>
+    <ul>
+      <li>Klicke auf einen der Kreise, um ein Foto hochzuladen – die Fotos werden in Münzgröße (1-Cent) dargestellt</li>
+      <li>Nach dem Drucken die Figuren ausschneiden und auf eine Münze kleben, damit sie stehen</li>
+      <li>Alternativ kannst du auch einfach beliebige Spielfiguren verwenden</li>
+    </ul>
   </div>
+
+  <!-- ── SEITEN ── -->
+  <div id="pages">
+
+    <!-- SEITE 1: Regeln -->
+    <div class="page page-regeln">
+      <div class="regeln-content">
+        <h1>Regeln</h1>
+        <ul>
+          <li>Schreibe dir deine aktuelle Punktzahl in Strichen in die Tabelle unten (am besten mit Bleistift)
+            <ul>
+              <li>Jeder startet mit 10 Punkten (Schreibe für jeden Spieler 10 Striche)</li>
+              <li>Punkte können nicht unter 0 oder über 15 steigen</li>
+            </ul>
+          </li>
+          <li>Würfle und gehe entsprechend viele Felder vor</li>
+          <li><strong>Klausurphase:</strong>
+            <ul>
+              <li>Immer dort anhalten, auch wenn du weiter gehen müsstest</li>
+              <li>Würfeln: 1–4 → bestanden; 5–6 → Nicht bestanden −2 Punkte</li>
+              <li>Nächste Runde darfst du weitergehen</li>
+            </ul>
+          </li>
+          <li><strong>Abitur:</strong>
+            <ul>
+              <li>5 oder mehr Punkte? → Würfeln
+                <ul>
+                  <li>Würfeln: 6 → Abitur bestanden; keine 6 → −1 Punkt &amp; neue Chance in nächster Runde</li>
+                </ul>
+              </li>
+              <li>Weniger als 5 Punkte → Rückfall auf „Nur noch ein Jahr"
+                <ul>
+                  <li>Kann auch durch −1 passieren, wenn du keine 6 würfelst</li>
+                  <li>Nach erstem Rückfall: nur noch ein Versuch beim Abitur, sonst nicht bestanden</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Gewonnen hat jeder mit Abitur; optional der Spieler mit den meisten Punkten</li>
+        </ul>
+
+        <hr>
+
+        <h2>Legende:</h2>
+        <ul>
+          <li>🟢 Grün +x = Addiere x Punkte zu deinem Punktestand</li>
+          <li>🔴 Rot −x = Ziehe x Punkte von deinem Punktestand ab</li>
+          <li>🟡 Gelb ⏸ = Setze 1 Runde aus</li>
+          <li>🔵 Blau +x/−x = Alle Spieler erhalten bzw. verlieren x Punkte</li>
+          <li>🎲 Pink = Spezialaktion: Würfeln</li>
+        </ul>
+
+        <hr>
+
+        <h2>Spezialaktion: Würfeln:</h2>
+        <ul>
+          <li><strong>Herr Wienstrath:</strong> 1 → +2 Punkte; 2 → +1; 3 → +/−&thinsp;0; 4 → −1; 5 → −2; 6 → −3</li>
+          <li><strong>Du spickst:</strong> 1–3 → +1 Punkt; 4–6 → −1 Punkt</li>
+          <li><strong>Kaufland:</strong>
+            <ul>
+              <li>„Nein": +1 Punkt ohne würfeln</li>
+              <li>„Ja": 1–3 → 3 Felder vor; 4–6 → 2 Runden aussetzen</li>
+            </ul>
+          </li>
+          <li><strong>Herr Stahl:</strong> Gehe die Augenzahl nach erneutem Würfeln vor</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SEITE 2: Figuren + Punktetabelle -->
+    <div class="page page-figuren">
+      <div class="figuren-titel">Spielfiguren</div>
+      <div class="figuren-anleitung">
+        Klicke auf einen Kreis, um ein Foto hochzuladen. Dann ausdrucken &amp; auf eine Münze kleben.
+      </div>
+      <div class="figuren-grid" id="figuren-grid"></div>
+
+      <div class="trennlinie"></div>
+
+      <div class="tabelle-titel">Punktestand</div>
+      <table class="punkte-tabelle">
+        <thead><tr><th>Spieler</th><th>Punktzahl</th></tr></thead>
+        <tbody id="punkte-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- SEITE 3: Spielkarte -->
+    <div class="page page-spielkarte">
+      <img src="spielkarte.png" alt="Spielkarte"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span>🎲</span>
+        <span><strong>Spielkarte</strong></span>
+        <span class="label">Lege deine Spielkarte als <strong>spielkarte.png</strong> in denselben Ordner wie diese HTML-Datei.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let selectedCount = 0;
+
+    function selectCount(n) {
+      selectedCount = n;
+      document.querySelectorAll('.player-count-btns button').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('.player-count-btns button')[n - 2].classList.add('selected');
+
+      const container = document.getElementById('player-names');
+      container.innerHTML = '';
+      for (let i = 1; i <= n; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Spieler ${i} – Name eingeben`;
+        input.id = `player-name-${i}`;
+        container.appendChild(input);
+      }
+
+      document.getElementById('start-btn').style.display = 'inline-block';
+    }
+
+    function startGame() {
+      const names = [];
+      for (let i = 1; i <= selectedCount; i++) {
+        const val = document.getElementById(`player-name-${i}`).value.trim();
+        names.push(val || `Spieler ${i}`);
+      }
+
+      // Punktetabelle
+      const tbody = document.getElementById('punkte-tbody');
+      tbody.innerHTML = '';
+      names.forEach(name => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${name}</td><td>&nbsp;</td>`;
+        tbody.appendChild(tr);
+      });
+
+      // Figuren-Grid
+      const grid = document.getElementById('figuren-grid');
+      grid.innerHTML = '';
+      names.forEach((name, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'figur-slot';
+
+        const kreis = document.createElement('div');
+        kreis.className = 'figur-kreis';
+        kreis.id = `kreis-${i}`;
+        kreis.innerHTML = `<span class="upload-hint">📷<br>Foto<br>hochladen</span>`;
+        kreis.onclick = () => document.getElementById(`file-${i}`).click();
+
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.id = `file-${i}`;
+        fileInput.style.display = 'none';
+        fileInput.onchange = (e) => loadImage(e, i);
+
+        const nameLabel = document.createElement('div');
+        nameLabel.className = 'figur-name';
+        nameLabel.textContent = name;
+
+        slot.appendChild(kreis);
+        slot.appendChild(fileInput);
+        slot.appendChild(nameLabel);
+        grid.appendChild(slot);
+      });
+
+      // Setup ausblenden, Hinweise + Seiten einblenden
+      document.getElementById('setup-screen').style.display = 'none';
+      document.getElementById('hinweise-container').style.display = 'block';
+      document.getElementById('pages').style.display = 'block';
+    }
+
+    function loadImage(e, index) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const kreis = document.getElementById(`kreis-${index}`);
+        kreis.innerHTML = `<img src="${ev.target.result}" alt="Spielerfoto">`;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
 
 </body>
 </html>
