@@ -31,7 +31,7 @@
 
     /* ── Seite 1: Regeln ── */
     .page-regeln {
-      background: #d4b896;
+      background: #f5ede0;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
@@ -158,6 +158,12 @@
       display: block;
     }
 
+    /* ── Seitenrand entfernen (Top-Level, damit mobile Browser es korrekt anwenden) ── */
+    @page {
+      size: A4 portrait;
+      margin: 0mm;
+    }
+
     /* ── Druckoptimierung ── */
     @media print {
       html, body {
@@ -165,6 +171,8 @@
         margin: 0;
         padding: 0;
         height: auto;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
       .page {
@@ -181,11 +189,6 @@
       .page:last-child {
         page-break-after: avoid;
         break-after: avoid;
-      }
-
-      @page {
-        size: A4 portrait;
-        margin: 0;
       }
     }
 
@@ -220,8 +223,8 @@
   <div class="page page-regeln">
     <div class="hinweis">
       <strong>So druckst du diese Datei:</strong><br>
-      1. Drücke <strong>Strg+P</strong> (oder Cmd+P) → Drucker auswählen → <strong>„Keine Ränder"</strong> einstellen → Drucken.<br>
-      2. Alternativ: Im Browser als PDF speichern (Ziel: „Als PDF speichern").
+      💻 <strong>Laptop/PC:</strong> Strg+P (oder Cmd+P) → <strong>„Keine Ränder"</strong> einstellen → Drucken.<br>
+      📱 <strong>Handy:</strong> Mobile Browser erzwingen oft Mindestränder. Beste Lösung: Seite zuerst als PDF speichern (Teilen → „In Dateien sichern" / „Als PDF") und das PDF dann drucken.
     </div>
 
     <div class="regeln-content">
@@ -284,6 +287,10 @@
     <table class="punkte-tabelle">
       <thead><tr><th>Spieler</th><th>Punktzahl</th></tr></thead>
       <tbody>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
         <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
         <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
         <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
