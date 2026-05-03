@@ -52,6 +52,9 @@
       font-size: 9pt;
       color: #2c1a0e;
       line-height: 1.55;
+      border: 2px solid #7a5a3a;
+      border-radius: 4px;
+      padding: 6px 8px;
     }
 
     .regeln-content h1 {
@@ -99,6 +102,25 @@
     }
 
     .regeln-content th {
+      background: #c4a47c;
+    }
+
+    .punkte-tabelle {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Georgia, serif;
+      font-size: 8.5pt;
+      color: #2c1a0e;
+      margin-top: 6px;
+    }
+
+    .punkte-tabelle th,
+    .punkte-tabelle td {
+      border: 1px solid #9a7a5a;
+      padding: 2px 20px;
+    }
+
+    .punkte-tabelle th {
       background: #c4a47c;
     }
 
@@ -206,18 +228,11 @@
       <h1>Regeln</h1>
 
       <ul>
-        <li>Jeder startet mit 10 Punkten</li>
-        <li>Punkte können nicht unter 0 oder über 15 steigen</li>
-        <li>Schreibe dir deine aktuelle Punktzahl auf – z.&thinsp;B. so:
-          <table>
-            <thead><tr><th>Spieler</th><th>Punkte</th></tr></thead>
-            <tbody>
-              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-            </tbody>
-          </table>
+        <li>Schreibe dir deine aktuelle Punktzahl in Strichen in die Tabelle unten (am besten mit Bleistift
+          <ul>
+            <li>Jeder startet mit 10 Punkten (Schreibe für jeden Spieler 10 Striche in die Tabelle)</li>
+            <li>Punkte können nicht unter 0 oder über 15 steigen</li>
+          </ul>
         </li>
         <li>Würfle und gehe entsprechend viele Felder vor</li>
         <li><strong>Klausurphase:</strong>
@@ -247,7 +262,7 @@
         <li>🔴 Rot −x = Ziehe x Punkte von deinem Punktestand ab</li>
         <li>🟡 Gelb ⏸ = Setze 1 Runde aus</li>
         <li>🔵 Blau +x/−x = Alle Spieler erhalten bzw. verlieren x Punkte</li>
-        <li>🩷 Pink = Spezialaktion: Würfeln</li>
+        <li>🎲 Pink = Spezialaktion: Würfeln</li>
       </ul>
 
       <hr>
@@ -265,6 +280,16 @@
         <li><strong>Herr Stahl:</strong> Gehe die Augenzahl nach erneutem Würfeln vor</li>
       </ul>
     </div>
+
+    <table class="punkte-tabelle">
+      <thead><tr><th>Spieler</th><th>Punktzahl</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- ── SEITE 2: Spielkarte ── -->
