@@ -39,18 +39,67 @@
       gap: 10px;
     }
 
-    .page-regeln img {
-      width: calc(100% - 10mm);
-      height: auto;
-      object-fit: contain;
-      display: block;
-      border-radius: 5px;
-    }
-
-    /* Hinweis auf Seite 1 im normalen Fluss (über dem Bild) */
+    /* Hinweis auf Seite 1 im normalen Fluss (über dem Text) */
     .page-regeln .hinweis {
       position: static;
       width: 100%;
+    }
+
+    /* ── Regeltext ── */
+    .regeln-content {
+      width: 100%;
+      font-family: Georgia, serif;
+      font-size: 9pt;
+      color: #2c1a0e;
+      line-height: 1.55;
+    }
+
+    .regeln-content h1 {
+      font-size: 14pt;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .regeln-content h2 {
+      font-size: 10pt;
+      margin-top: 6px;
+      margin-bottom: 3px;
+    }
+
+    .regeln-content ul {
+      margin: 0 0 4px 16px;
+      padding: 0;
+    }
+
+    .regeln-content ul ul {
+      margin-left: 14px;
+    }
+
+    .regeln-content li {
+      margin-bottom: 2px;
+    }
+
+    .regeln-content hr {
+      border: none;
+      border-top: 1px solid #9a7a5a;
+      margin: 6px 0;
+    }
+
+    .regeln-content table {
+      border-collapse: collapse;
+      margin: 4px 0 2px 0;
+      font-size: 8.5pt;
+    }
+
+    .regeln-content th,
+    .regeln-content td {
+      border: 1px solid #9a7a5a;
+      padding: 2px 20px;
+    }
+
+    .regeln-content th {
+      background: #c4a47c;
     }
 
     /* Platzhalter falls kein Bild vorhanden */
@@ -152,12 +201,69 @@
       1. Drücke <strong>Strg+P</strong> (oder Cmd+P) → Drucker auswählen → <strong>„Keine Ränder"</strong> einstellen → Drucken.<br>
       2. Alternativ: Im Browser als PDF speichern (Ziel: „Als PDF speichern").
     </div>
-    <img src="regeln.png" alt="Regeln"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-    <div class="placeholder" style="display:none;">
-      <span>📋</span>
-      <span><strong>Regeln</strong></span>
-      <span class="label">Lege dein Regelbild als <strong>regeln.png</strong> in denselben Ordner wie diese HTML-Datei.</span>
+
+    <div class="regeln-content">
+      <h1>Regeln</h1>
+
+      <ul>
+        <li>Jeder startet mit 10 Punkten</li>
+        <li>Punkte können nicht unter 0 oder über 15 steigen</li>
+        <li>Schreibe dir deine aktuelle Punktzahl auf – z.&thinsp;B. so:
+          <table>
+            <thead><tr><th>Spieler</th><th>Punkte</th></tr></thead>
+            <tbody>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li>Würfle und gehe entsprechend viele Felder vor</li>
+        <li><strong>Klausurphase:</strong>
+          <ul>
+            <li>Immer dort anhalten, auch wenn du weiter gehen müsstest</li>
+            <li>Würfeln: 1–4 → bestanden; 5–6 → Nicht bestanden −2 Punkte; nächste Runde darfst du weitergehen</li>
+          </ul>
+        </li>
+        <li><strong>Abitur:</strong>
+          <ul>
+            <li>5 oder mehr Punkte? → Würfeln
+              <ul>
+                <li>Würfelt man 6 → Abitur bestanden; keine 6 → −1 Punkt &amp; neue Chance in nächster Runde</li>
+              </ul>
+            </li>
+            <li>Weniger als 5 Punkte → Rückfall auf „Nur noch ein Jahr"</li>
+          </ul>
+        </li>
+        <li>Gewonnen hat jeder mit Abitur; optional der Spieler mit den meisten Punkten</li>
+      </ul>
+
+      <hr>
+
+      <h2>Legende:</h2>
+      <ul>
+        <li>🟢 Grün +x = Addiere x Punkte zu deinem Punktestand</li>
+        <li>🔴 Rot −x = Ziehe x Punkte von deinem Punktestand ab</li>
+        <li>🟡 Gelb ⏸ = Setze 1 Runde aus</li>
+        <li>🔵 Blau +x/−x = Alle Spieler erhalten bzw. verlieren x Punkte</li>
+        <li>🩷 Pink = Spezialaktion: Würfeln</li>
+      </ul>
+
+      <hr>
+
+      <h2>Spezialaktion: Würfeln:</h2>
+      <ul>
+        <li><strong>Herr Wienstrath:</strong> 1 → +2 Punkte; 2 → +1; 3 → +/−&thinsp;0; 4 → −1; 5 → −2; 6 → −3</li>
+        <li><strong>Du spickst:</strong> 1–3 → +1 Punkt; 4–6 → −1 Punkt</li>
+        <li><strong>Kaufland:</strong>
+          <ul>
+            <li>„Nein": +1 Punkt ohne würfeln</li>
+            <li>„Ja": 1–3 → 3 Felder vor; 4–6 → 2 Runden aussetzen</li>
+          </ul>
+        </li>
+        <li><strong>Herr Stahl:</strong> Gehe die Augenzahl nach erneutem Würfeln vor</li>
+      </ul>
     </div>
   </div>
 
